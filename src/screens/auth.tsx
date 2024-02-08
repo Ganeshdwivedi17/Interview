@@ -16,7 +16,7 @@ import Notify from "../components/Notify";
 import { useAuth } from "../hooks/useAuth";
 import LinearBackground from "../components/LinearBackground";
 
-function Auth({ mainScreen, setMainScreen,setJobViewContext }: { mainScreen: number, setMainScreen: any,setJobViewContext:any }) {
+function Auth({ mainScreen, setMainScreen,setJobViewContext,fromforgetPassword,setFromForgetPassword }: { mainScreen: number, setMainScreen: any,setJobViewContext:any, setFromForgetPassword:any, fromforgetPassword:any }) {
   const { isLoggedIn } = useAuth();
   const [showScreen, setshowScreen] = useState(0);
   const [signUpFormData, setSignUpFormData] = useState({
@@ -152,10 +152,10 @@ function Auth({ mainScreen, setMainScreen,setJobViewContext }: { mainScreen: num
           <div className={`flip-element`} style={{ height: 472 }}>
             <SignInForm className={` m-0 flip-child flip-child-0 hover-anim`} setshowScreen={setshowScreen} setMainScreen={setMainScreen} />
             <AccountForm className={`d-none m-0 flip-child flip-child-1`} setshowScreen={setshowScreen} handleFormChange={handleChange} signUpFormErrors={signUpFormErrors} signUpFormData={signUpFormData} setErrorMessage={setErrorMessage} />
-            <NewPwdForm className={`d-none m-0 flip-child flip-child-2`} setshowScreen={setshowScreen} handleFormChange={handleChange} signUpFormErrors={signUpFormErrors} signUpFormData={signUpFormData} setErrorMessage={setErrorMessage} />
+            <NewPwdForm fromforgetPassword={fromforgetPassword} className={`d-none m-0 flip-child flip-child-2`} setshowScreen={setshowScreen} handleFormChange={handleChange} signUpFormErrors={signUpFormErrors} signUpFormData={signUpFormData} setErrorMessage={setErrorMessage} />
             <SignupForm className={`d-none m-0 flip-child flip-child-3`} setshowScreen={setshowScreen} signUpFormData={signUpFormData} handleFormChange={handleChange} signUpFormErrors={signUpFormErrors} setSignUpFormErrors={setSignUpFormErrors} setErrorMessage={setErrorMessage} />
-            <EmailLoginForm className={`d-none m-0 flip-child flip-child-4`} setshowScreen={setshowScreen} setMainScreen={setMainScreen} setErrorMessage={setErrorMessage} />
-            <ForgotPwdForm className={`d-none m-0 flip-child flip-child-5`} setshowScreen={setshowScreen} />
+            <EmailLoginForm fromforgetPassword={fromforgetPassword} setFromForgetPassword={setFromForgetPassword} className={`d-none m-0 flip-child flip-child-4`} setshowScreen={setshowScreen} setMainScreen={setMainScreen} setErrorMessage={setErrorMessage} />
+            <ForgotPwdForm setErrorMessage={setErrorMessage} className={`d-none m-0 flip-child flip-child-5`} setshowScreen={setshowScreen} />
             <EnterCodeForm className={`d-none m-0 flip-child flip-child-6`} setshowScreen={setshowScreen} />
           </div>
         </div>
@@ -193,8 +193,8 @@ function Auth({ mainScreen, setMainScreen,setJobViewContext }: { mainScreen: num
 
         <div className="leftSideDiv rightSideBg pos-rel over-hdn auth-page bg-transparent">
           <div className="leftSideHeader kjsf-ajmwe">
-            {showScreen > 0 ? (
-              <BackButton showScreen={showScreen} setshowScreen={setshowScreen} />
+            {showScreen > 0 ? (            
+              <BackButton setFromForgetPassword={setFromForgetPassword} showScreen={showScreen} setshowScreen={setshowScreen} />
             ) : (
               <></>
             )}
@@ -206,7 +206,7 @@ function Auth({ mainScreen, setMainScreen,setJobViewContext }: { mainScreen: num
             ) : null}
           </div>
         </div>
-        <RightLayout2 setJobViewContext={setJobViewContext} setMainScreen={setMainScreen} setShowScreen={setshowScreen} showScreen={showScreen} mainScreen={mainScreen} />
+        <RightLayout2 setFromForgetPassword={setFromForgetPassword} setJobViewContext={setJobViewContext} setMainScreen={setMainScreen} setShowScreen={setshowScreen} showScreen={showScreen} mainScreen={mainScreen} />
       </div>
     </LinearBackground>
   );

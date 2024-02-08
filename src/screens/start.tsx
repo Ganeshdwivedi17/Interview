@@ -45,7 +45,6 @@ function Next({ jobViewContext,fromPreview, setMainScreen, fromShareScreen, setJ
 
   useEffect(() => {
     if (fromShareScreen) {
-      console.log("fromShareScreen", fromShareScreen)
       setScreen(1)
     }
   }, [fromShareScreen])

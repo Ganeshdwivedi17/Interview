@@ -80,7 +80,7 @@ setMainScreen(3)
               <></>
           }
           {showScreen > 5 ? (
-            <div className={`lnjsadnksa-sda ${isMobile && showScreen == 7 ? "" : "kjsadl-asdksm"}`} style={{ position: 'absolute', top: 0 }}>
+            <div className={`lnjsadnksa-sda ${isMobile && showScreen == 7 ? "" : "kjsadl-asdksm"}`} style={{ position: 'absolute', top: '33px', height: '84% !important' }}>
               
               
               {showScreen == 6 || showScreen == 7 ? (

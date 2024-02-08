@@ -13,6 +13,7 @@ import questions_logo from "../images/ques.svg";
 import cancel_logo from "../images/close.svg";
 import JobTitle from "../components/Questions/JobTitle";
 import { IoBriefcaseSharp } from "react-icons/io5";
+import axios from "axios";
 
 export enum AnswerFilter {
   LastHour = 'Last hour',
@@ -33,26 +34,9 @@ function View({ mainScreen,setJobViewContext, setMainScreen, setChatUser, jobVie
   const handleFilterShow = () => setShowFilter(true);
 
 
-  // let parsedValue: any;
-
-  // try {
-  //   parsedValue = JSON.parse(storedValue ?? 'null');
-  // } catch (error) {
-  //   // Handle the error, e.g., log it or set a default value
-  //   console.error('Error parsing JSON from localStorage:', error);
-  //   parsedValue = []; // Set a default value questionHeader
-  // }
-
-    
-//  const textSlider = textSliderRef.current;
-//     if (textSlider && questions) {
-//       const animationDuration = questions.length * 3; // Adjust the multiplier for speed
-//       textSlider.style.animationDuration = `${animationDuration}s`;
-  
-//   }
+  const JOBTITLE = localStorage.getItem('JobTitle') ?localStorage.getItem('JobTitle') : "";
 
 
-const JOBTITLE = localStorage.getItem('JobTitle') ?localStorage.getItem('JobTitle') : ""
 
   useEffect(() => {
     if (selectedInterview) {
