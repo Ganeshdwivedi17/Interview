@@ -33,7 +33,7 @@ const MainForm = ({ setMainScreen,setJobViewContext, showScreen, setshowScreen, 
   const [loading, setLoading] = useState(true)
   const [show, setShow] = useState(true)
   const { user } = useAuth()
-    const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 15; // Number of jobs per page
   const [showMore, setShowMore] = useState(false);
 
@@ -56,32 +56,31 @@ useEffect(() => {
 
   useEffect(() => {
     setLoading(true)
-   GetAnswers()
+    GetAnswers()
   }, [myAnswers]);
 
 
   const GetAnswers = () =>{ axios.get(process.env.REACT_APP_BACKEND_URL + '/interviews',
     ).then(response => {
       setLoading(false)
-      // if (watchAns) {
-      //   const filtered = response?.data?.filter((obj: any) => obj.job_id == jobViewContext?._id)
-      //   handleFilteration(filtered)
 
-      // }
-      // else 
-      let interviewData = response.data;  
+
+      let interviewData = response.data;
       let filterData: any = [];
       let job_id :any = [];
 
-      // let question_id: any = [];
-      // let duplicate_questionId: any = []
-      
       for(let i=0; i<response.data.length; i++){
-        if(!job_id.includes(interviewData[i].job_id)){
-          job_id.push(interviewData[i].job_id)
+        if(!job_id.includes(interviewData[i]?.job_id)){
+          job_id.push(interviewData[i]?.job_id)
           filterData.push(interviewData[i])
         }
       }
+
+      filterData = filterData.filter((item:any)=>{
+        let loc1 = item?.interviewer?.location;
+        let loc2 = user?.location;
+        return loc1.toLowerCase() === loc2?.toLowerCase();
+      })
 
       if (myAnswers) {
         const filtered = filterData.filter((obj: any) => obj.interviewer._id == user?.id)
@@ -198,7 +197,7 @@ useEffect(() => {
 
       <div className="kdhfkjjdsfo">
         <Icons iconNumber={32} />
-        <h5 className="mksaldkamaw-jdwa">London, UK</h5>
+        <h5 className="mksaldkamaw-jdwa">{user?.location.toUpperCase()}</h5>
       </div>
 
       <div className="leftSideContentAnswers">
@@ -212,7 +211,7 @@ useEffect(() => {
                 <Row className="row-cols-3 row-cols-sm-4 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 justify-content-start mxrow-answers" style={{ gap: 10, padding: '4px 14px' }} >
                   {
                     currentJobs.map((interview, index) => (
-                      <Col className="p-0 mb-0 d-inline-flex justify-content-center align-items-center" style={{ cursor: 'pointer', width:'32%', maxWidth: '120px', maxHeight: '226px' }} key={index}>
+                      <Col className="p-0 mb-0 d-inline-flex justify-content-center align-items-center" style={{ cursor: 'pointer', width:'100%', maxWidth: '120px', maxHeight: '226px' }} key={index}>
                         <Card setMainScreen={setMainScreen} showScreen={showScreen} setshowScreen={setshowScreen} interview={interview} handleFilteration={handleFilteration} setSelectedInterview={setSelectedInterview} />
                       </Col>
                     ))
@@ -233,10 +232,6 @@ useEffect(() => {
 
                     </div>
                     </>
-                   
-                 
-
-
                 ))}
 
         </div>

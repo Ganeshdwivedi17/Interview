@@ -14,6 +14,9 @@ const RightButtons = ({ hideMenu, setChatUser, selectedInterview, setAllIntervie
   const [showDelInterview, setShowDelInterview] = useState(false);
   const { setJobViewContext, user } = useAuth();
 
+  const role = user?.chat?.user?.users[user.id].role;
+
+
   return <div className={`kljadjfkl-jaem kjdlamkdl-asdj ${isTab ? "adaslkhdfjksj-ajenw" : ""}`}>
     <button className='no-shadow circleButtons' onClick={() => {
       if (selectedInterview?.id && typeof setAllInterviews === 'function' && typeof setFavourite === 'function') {
@@ -56,7 +59,7 @@ const RightButtons = ({ hideMenu, setChatUser, selectedInterview, setAllIntervie
       <Icons iconNumber={isTab ? 72 : 48} />
       Messages
     </button>
-    {(user?.id == selectedInterview?.id || user?.id == selectedInterview?.id) ? <button className='no-shadow circleButtons' onClick={() => setShowDelInterview(true)}>
+    {(role === 'admin' || user?.id == selectedInterview?.interviewee?._id) ? <button className='no-shadow circleButtons' onClick={() => setShowDelInterview(true)}>
       <Icons iconNumber={isTab ? 73 : 49} />
       Delete
     </button> : null}

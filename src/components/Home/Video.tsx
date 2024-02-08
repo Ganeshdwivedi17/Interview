@@ -1,5 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { getAge } from "../../utils/validate-email";
+import profile_pic from "../../images/Profile Pic.svg"
+import { useAuth } from "../../hooks/useAuth";
 import Icons from "../icons";
 import axios from "axios";
 
@@ -10,9 +12,12 @@ const VideoForm = ({ selectedInterview, favourite }: { selectedInterview?: any, 
   const [showSlide, setShowSlide] = useState<number>(0);
   const [ userVideo, setUserVideo] = useState<any>();
   const [playPromise, setPlayPromise] = useState<any>(undefined);
+  const subscribed = localStorage.getItem("subscribed");
   const [duration, setDuration] = useState<any>();
+  const { user } = useAuth();
   const videoRef = useRef<any>(null);
 
+  const role = user?.chat?.user?.users[user.id].role;
 
   useEffect(() => {
     if (selectedInterview?.id) {
@@ -26,6 +31,13 @@ const VideoForm = ({ selectedInterview, favourite }: { selectedInterview?: any, 
     if (videoRef?.current) {
       if (playing) {
         setPlayPromise(videoRef.current.play());
+        if(subscribed==="false" && role==="user"){
+          setTimeout(()=>{
+            videoRef?.current?.pause();
+            setPlayPromise(undefined);
+            setPlaying(false);
+          },8000);
+        }
       } else {
         if (playPromise != undefined) {
           playPromise.then((_: any) => {
@@ -64,7 +76,6 @@ const VideoForm = ({ selectedInterview, favourite }: { selectedInterview?: any, 
           }
         }
       })
-      console.log(filterData)
       setUserVideo(filterData);
     })
   }
@@ -105,14 +116,15 @@ const VideoForm = ({ selectedInterview, favourite }: { selectedInterview?: any, 
     setHoverShow(false);
   };
 
+
  
   return (
     <div className="kjjfds-janwkea4">
       {/* <img src={require("../../images/i6.png")} /> */}
       <div className={`jljdskaflsd ${hoverShow ? `d-flex` : `d-${playing ? 'none' : 'flex'}`}`}>
         <div className='kldfjads'>
-          <div>
-            <img src={require('../../images/i5.png')} />
+          <div style={{width:"47px", height:"47px", borderRadius:"50%"}}>
+             <img src={selectedInterview?.interviewee?.profile_image?selectedInterview?.interviewee?.profile_image:profile_pic} alt="profile" height='100%' width='100%' />
           </div>
           <div>
             <h5>{selectedInterview?.interviewee?.name || 'Sarah Pillman-Murphy'}</h5>

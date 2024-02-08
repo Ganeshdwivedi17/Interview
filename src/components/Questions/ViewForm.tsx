@@ -6,10 +6,14 @@ import { Flip } from "react-awesome-reveal"
 import CheckFormBox from "../CheckBoxForm";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { getAge } from "../../utils/validate-email";
+import profile_pic from "../../images/Profile Pic.svg"
 
 const ViewForm = ({ setMainScreen, setShowScreen, setPastScreen, jobView, setChatUser, jobViewContext, setWatchAns }: { setMainScreen: any, setShowScreen: any, setPastScreen: any, jobView: any, setChatUser: any, jobViewContext: any, setWatchAns: any }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 1013px)' });
   const [_jobView, setJobView] = useState(jobView || jobViewContext);
+
+  // console.log(_jobView)
 
   useEffect(() => {
     getJobDetails();
@@ -34,12 +38,12 @@ const ViewForm = ({ setMainScreen, setShowScreen, setPastScreen, jobView, setCha
           <div className="kafms-kfsamfer">
             <div className="skfalk-smdsefds">
               <div className="kdjnfakdsfm-jsamre">
-                <img src={require("../../images/i5.png")} />
+                <img src={_jobView?.interviewer?.profile_image ? _jobView?.interviewer?.profile_image : profile_pic} />
               </div>
               <div className="kjdflkads-mdskf">
                 <h3>{_jobView?.job_title || ''}</h3>
                 <h5>
-                  <Icons iconNumber={16} /> {_jobView?.job_recruiter || _jobView?.interviewer?.company_name || ''}
+                  <Icons iconNumber={16} /> {getAge(_jobView?.interviewer?.birth_date) || '25'},&nbsp;{_jobView?.job_recruiter || _jobView?.interviewer?.company_name || ''}
                 </h5>
                 <h6>
                   <Icons iconNumber={17} />{_jobView?.interviewer?.location || ''}
@@ -50,9 +54,6 @@ const ViewForm = ({ setMainScreen, setShowScreen, setPastScreen, jobView, setCha
               {_jobView?.questions?.length ? _jobView?.questions?.map((data: any, index: any) => (
                 <CheckFormBox questions={data} forcedActive={false} />
               )) : null}
-              {/* <CheckFormBox /> */}
-              {/* <CheckFormBox />
-              <CheckFormBox /> */} 
             </div>
             <div className="kdjsa-ajwnkelds afkfjnkas-edsm">
               <div className="continueBtnDiv snasdj-sawdne">

@@ -41,7 +41,7 @@ const RightButtons = ({ setMainScreen }: { setMainScreen?: any }) => {
 const Carousel = ({ selectedInterview,setPaginate,nextInterview, setMainScreen, paginate = 1 }: { selectedInterview?: any, setMainScreen?: any,nextInterview?:any, paginate?: any,setPaginate:any }) => {
   const [favourite, setFavourite] = useState(selectedInterview?.favourite || false);
 
-  console.log(selectedInterview,"_________________")
+
 
   return (
     <div className='wh-100 kjsdfl-asjdm' style={{ position: 'absolute' }}>

@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { getAge } from "../../utils/validate-email";
+import profile_pic from '../../images/Profile Pic.svg';
 import Icons from "../icons";
 import axios from "axios";
 
@@ -121,14 +122,14 @@ const VideoForm = ({ selectedInterview, favourite,setPaginate, paginate = 1,next
     setTimerInterval(setInterval(updateTimer, frameDuration));
   }
 
+
   return (
     <div style={{ position: 'relative', marginLeft: 65 }}>
       <div className="kjjfds-janwkea4" style={{ overflow: 'hidden', borderRadius: 23, height: 585 }}>
-        {/* <img src={require("../../images/i6.png")} /> */}
         <div className={`jljdskaflsd d-flex`} style={{ background: 'linear-gradient(182.61deg, rgba(0, 0, 0, 0.2) -0.73%, rgba(0, 0, 0, 0) 93.15%)' }}>
           <div className='kldfjads' style={{ padding: '10px 13px' }}>
             <div>
-              <img src={require('../../images/i5.png')} />
+              <img src={job?.interviewee?.profile_image? job?.interviewee?.profile_image: profile_pic} />
             </div>
             <div> 
               <h5 style={{ top: 7 }}>{selectedInterview?.interviewee?.name || 'Sarah Pillman-Murphy'}</h5>

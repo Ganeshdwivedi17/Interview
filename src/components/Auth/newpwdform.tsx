@@ -4,14 +4,13 @@ import { useMediaQuery } from 'react-responsive'
 import { errorByKey } from "../../helper";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 
-const NewPwdForm = ({ setshowScreen, className = '', handleFormChange, signUpFormErrors, setErrorMessage = null, signUpFormData = {} }: { setshowScreen: any, className?: string, handleFormChange: any, signUpFormErrors: any, setErrorMessage?: any, signUpFormData?: any }) => {
+const NewPwdForm = ({ setshowScreen,fromforgetPassword, className = '', handleFormChange, signUpFormErrors, setErrorMessage = null, signUpFormData = {} }: { setshowScreen: any, className?: string, handleFormChange: any, signUpFormErrors: any, setErrorMessage?: any, signUpFormData?: any, fromforgetPassword:any }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   const [hasError, setHasError] = useState('');
 
   const showError = (key: any) => {
     return hasError === key;
   };
-
   useEffect(() => {
     if (errorByKey(signUpFormErrors, 'password')) {
       setHasError('password');
@@ -54,10 +53,18 @@ const NewPwdForm = ({ setshowScreen, className = '', handleFormChange, signUpFor
       } else {
         setHasError('');
         setErrorMessage('');
+        if(fromforgetPassword){
+          setshowScreen(4);
+        }else{
         setshowScreen(3);
+        }
       }
     } else {
-      setshowScreen(3);
+      if(fromforgetPassword){
+          setshowScreen(4);
+        }else{
+        setshowScreen(3);
+        }
     }
   };
   const [showPassword, setShowPassword] = useState(false);
@@ -71,7 +78,7 @@ const NewPwdForm = ({ setshowScreen, className = '', handleFormChange, signUpFor
       </div>
       <div className={`jhjij-sanwe ${isTabletOrMobile ? "klhdlfj-ajee2" : ""}`} style={{ height: '100%', justifyContent: 'space-between', marginTop: 0 }}>
         <div style={{ flex: 1, width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: 197 }}>
-          <h3 className={`${isTabletOrMobile ? "" : "hkjsda-jesa"}`} style={{ fontFamily: 'Roboto', fontSize: '16px', fontWeight: 600, lineHeight: '19px', letterSpacing: '0.6000000238418579px', textAlign: 'center' }}>Create Password</h3>
+          <h3 className={`${isTabletOrMobile ? "" : "hkjsda-jesa"}`} style={{ fontFamily: 'Roboto', fontSize: '16px', fontWeight: 600, lineHeight: '19px', letterSpacing: '0.6000000238418579px', textAlign: 'center' }}>{fromforgetPassword ? "Create New Password":"Create Password"}</h3>
           <h4 style={{ fontFamily: 'HK Grotesk', fontSize: 12, fontWeight: 500, lineHeight: '28px', letterSpacing: 0, textAlign: 'center' }}>Password must be at least 8 characters</h4>
 
           <div className={`${isTabletOrMobile ? "w-100" : "kdjsa-ajwnkelds"}`}>
@@ -82,6 +89,7 @@ const NewPwdForm = ({ setshowScreen, className = '', handleFormChange, signUpFor
                   _node.focus();
                 }
               }}>
+                
                 <Icons iconNumber={9} />
                 <input type={showPassword ? 'text' : 'password'} name="password" placeholder="Password" onChange={handleFormChange} autoComplete="off" style={{ flex: 1 }} />
                 <span className="currser-pointer" onClick={togglePasswordVisibility}>

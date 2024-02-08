@@ -1,5 +1,6 @@
 import Icons from "../icons"
 import { getAge } from "../../utils/validate-email";
+import profile_pic from "../../images/Profile Pic.svg"
 import { useEffect, useState } from "react";
 
 const Card = ({ showFav, setMainScreen, showScreen, setshowScreen, interview, handleFilteration, setSelectedInterview }: { showFav?: boolean, setMainScreen: any, showScreen: number, setshowScreen: any, interview: any, handleFilteration: any, setSelectedInterview: any }) => {
@@ -16,32 +17,36 @@ const Card = ({ showFav, setMainScreen, showScreen, setshowScreen, interview, ha
   useEffect(() => {
  
 }, [Load])
-console.log(Load)
+
 
   return <div onClick={() => {
     setSelectedInterview(interview);
   }} className="candidateCard" style={{ height: 226, width: 120, background: `url("data:image/svg+xml,${encodeURIComponent(svgBackground)}")` }}>
- {Load &&interview.videoLink ? (
+ {/* {Load &&interview.videoLink ? (
     <video onLoadedMetadata={()=> setLoad(true)} style={{ position: 'relative', borderRadius: 7, background: 'rgba(0,0,0,0.6)', marginTop: 1 }} width={116} height={214}
       src={interview.videoLink}
     />):
-    (
+    ( */}
+    {/* Used image instead of video */}
             <img src={require("../../images/i6.png")} style={{ position: 'relative', borderRadius: 7, width:"116", height:"214", top: '0.75%' }} />
-          )
-          }
-    <div className="cardInfoDiv" style={{ padding: '0px 5px 0px 7px' }}>
-      <div className="intervieweeName" >
-      {/* Steven Aubrey */}
-        {interview?.interviewee?.name}
-      </div>
-      <div className="intervieweeDetail">
-        <Icons iconNumber={32} />
-        <span>
-        {/* 36, London, UK */}
+          {/* )
+         } */}
+    <div className="cardInfoDiv" style={{ padding: '0px 5px 0px 7px', display:"flex", alignItems:"center", gap:"5px" }}>
+      <div style={{height: '20px', width:'20px', borderRadius:'50%'}}><img src={interview?.interviewee?.profile_image?interview?.interviewee?.profile_image:profile_pic} alt="profile" style={{ borderRadius:'50%'}} height='100%' width='100%' /></div>
+        <div>
+        <div className="intervieweeName" >
+        {/* Steven Aubrey */}
+          {interview?.interviewee?.name}
+        </div>
+        <div className="intervieweeDetail">
+          <Icons iconNumber={32} />
+          <span>
+          {/* 36, London, UK */}
           {getAge(interview?.interviewee?.birth_date )}, &nbsp;
-         {interview?.interviewee?.location}
-        </span>
-       
+          {interview?.interviewee?.location}
+          </span>
+        
+        </div>
       </div>
     </div>
     {interview?.favourite ? (

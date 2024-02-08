@@ -4,7 +4,7 @@ import Icons from "../../components/icons";
 import { useAuth } from "../../hooks/useAuth";
 import { errorByKey } from "../../helper";
 import { BsEyeSlash,BsEye  } from "react-icons/bs";
-const EmailLoginForm = ({ setshowScreen, className = '', setMainScreen, setErrorMessage }: { setshowScreen: any, className?: string, setMainScreen: any, setErrorMessage: any }) => {
+const EmailLoginForm = ({ setshowScreen,fromforgetPassword,setFromForgetPassword, className = '', setMainScreen, setErrorMessage }: { setshowScreen: any, className?: string, setMainScreen: any, setFromForgetPassword:any , setErrorMessage: any , fromforgetPassword:any }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   const [isAgree, setisAgree] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
@@ -141,6 +141,7 @@ const EmailLoginForm = ({ setshowScreen, className = '', setMainScreen, setError
               <div className={`${isTabletOrMobile ? "jdsfknla-wnejnw" : ""}`}>
                 <button onClick={() => {
                   setshowScreen(5)
+                  setFromForgetPassword(true)
                 }} className="no-shadow">Forgot Password?</button>
               </div>
             </div>

@@ -4,7 +4,7 @@ import SimpleCheckBox from './simpleCheck';
 import SettingMenuIcon from './SettingMenuIcon';
 import { useAuth } from '../hooks/useAuth';
 import Typewriter from 'typewriter-effect'
-const RightLayout = ({ setMainScreen,setJobViewContext, setShowScreen, showScreen = null, style = {}, mainScreen = null }: { setMainScreen: any, setShowScreen: any, showScreen?: any, style?: any,setJobViewContext:any,mainScreen?: any }) => {
+const RightLayout = ({ setMainScreen,setJobViewContext,setFromForgetPassword, setShowScreen, showScreen = null, style = {}, mainScreen = null }: { setMainScreen: any, setShowScreen: any, showScreen?: any, style?: any,setJobViewContext:any,mainScreen?: any,setFromForgetPassword?:any }) => {
   const { isLoggedIn } = useAuth();
   const [isLoginChecked, setIsLoginChecked] = useState(true);
   useEffect(() => {
@@ -35,6 +35,10 @@ const RightLayout = ({ setMainScreen,setJobViewContext, setShowScreen, showScree
         <div className="tabs">
           <input type="radio" id="radio-1" name="tabs" 
           onChange={() => {
+            if(setFromForgetPassword){
+          setFromForgetPassword(false)
+            }
+
             if (typeof setShowScreen === 'function') {
               setIsLoginChecked(false);
               setShowScreen(1);
@@ -47,6 +51,10 @@ const RightLayout = ({ setMainScreen,setJobViewContext, setShowScreen, showScree
           <label className="tab" htmlFor="radio-1" >SIGN UP</label>
           <input type="radio" id="radio-2" name="tabs" 
           onChange={() => {
+            if(setFromForgetPassword){
+          setFromForgetPassword(false)
+            }
+
             if (typeof setShowScreen === 'function') {
               setIsLoginChecked(true);
               setShowScreen(0);

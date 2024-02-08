@@ -10,8 +10,6 @@ const JobCard = ({ setShareScreen, setMainScreen, setFromShareScreen, sharedJobD
     // const { sharedJobData }: { sharedJobData: any } = useShared()
     const { isLoggedIn } = useAuth()
 
-    console.log("shared job data card", sharedJobData)
-
     return (
         <div className={`kjjfds-janwkea1 kjjfds-janwkea2 white-form height-none`} style={{ marginTop: "100px", marginBottom: "140px" }}>
             <div className='wave-box'>
@@ -40,15 +38,11 @@ const JobCard = ({ setShareScreen, setMainScreen, setFromShareScreen, sharedJobD
                 <div className="kdjsa-ajwnkelds afkfjnkas-edsm">
                     <div className="continueBtnDiv snasdj-sawdne">
                         <button className="btn" onClick={() => {
-                            console.log('isloggedin', isLoggedIn())
                             if (isLoggedIn()) {
-                                console.log('inside isloggedin')
                                 setMainScreen(3)
                                 setFromShareScreen(true)
-
                             }
                             else {
-                                console.log("not loggedin case")
                                 setShareScreen(2)
                             }
                         }}>

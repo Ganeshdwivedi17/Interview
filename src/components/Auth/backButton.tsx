@@ -3,13 +3,27 @@ import Icons from "../icons";
 const BackButton = ({
     showScreen,
     setshowScreen,
+    setFromForgetPassword
   }: {
     showScreen: number;
     setshowScreen: any;
+    setFromForgetPassword:any;
   }) => {
     return (
       <div
         onClick={() => {
+
+            if(setFromForgetPassword){
+           if (showScreen == 6) {
+            setshowScreen(5);
+          } else if (showScreen == 2 ) {
+            setshowScreen(6);
+          } else if (showScreen == 5 ) {
+            setshowScreen(4);
+             setFromForgetPassword(false)
+          }
+         
+            }else{    
           if (showScreen == 1) {
             setshowScreen(0);
           } else if (showScreen == 2) {
@@ -24,6 +38,7 @@ const BackButton = ({
             setshowScreen(5);
           } else if (showScreen == 7 ) {
             setshowScreen(6);
+          }
           }
         }}
         className="skdmsa-dsad"

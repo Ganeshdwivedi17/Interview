@@ -2,9 +2,21 @@ import { useMediaQuery } from "react-responsive";
 
 import Icons from "../../components/icons";
 import icon from "../../images/reset_password.svg";
+import { useState } from "react";
+import axios from "axios";
 
-const ForgotPwdForm = ({ setshowScreen, className = '' }: { setshowScreen: any, className?: string }) => {
+const ForgotPwdForm = ({ setshowScreen,setErrorMessage, className = '' }: { setshowScreen: any, className?: string,setErrorMessage:any }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+  const [email,setEmail] = useState<any>("");
+ const [hasError, setHasError] = useState('');
+  const showError = (key: any) => {
+    return hasError === key;
+  };
+
+    const getEmail = async() => {
+const response = await axios.post(`http://localhost:4000/users/forget-password`,{email})
+console.log(response);
+  }
 
   return (
     <div className={`${isTabletOrMobile ? "kjjfds-janwkea" : "kjjfds-janwkea1 kjjfds-janwkea2"} white-form ${className}`}>
@@ -19,14 +31,14 @@ const ForgotPwdForm = ({ setshowScreen, className = '' }: { setshowScreen: any, 
 
           <div className={`${isTabletOrMobile ? "w-100" : "kdjsa-ajwnkelds"}`}>
             <div className={`${isTabletOrMobile ? "hjk-ajwednw" : ""} emailRowDiv sadhasdn-we`}>
-              <div className="jksd-kosaeknae" style={{ cursor: 'text' }} onClick={(e) => {
+              <div className={`jksd-kosaeknae ${showError('password') ? 'error-border' : ''}`} style={{ cursor: 'text' }} onClick={(e) => {
                 const _node: HTMLInputElement | null = e?.currentTarget?.querySelector('input[name="email"]');
                 if (_node) {
                   _node.focus();
                 }
               }}>
                 <Icons iconNumber={90} />
-                <input placeholder="Email" name="email" autoComplete="off" style={{ flex: 1 }} />
+                <input value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder="Email" name="email" autoComplete="off" style={{ flex: 1 }} />
               </div>
             </div>
           </div>
@@ -34,7 +46,18 @@ const ForgotPwdForm = ({ setshowScreen, className = '' }: { setshowScreen: any, 
 
         <div className={`${isTabletOrMobile ? "jjlkajsd-awje-msakm3e" : ""} continueBtnDiv snasdj-sawdne`} style={{ marginBottom: 17 }}>
           <button onClick={() => {
-            setshowScreen(6)
+           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+           const isValidEmail = emailRegex.test(email);
+           if(isValidEmail){ 
+           setshowScreen(6)
+           getEmail()
+           }else{
+             setHasError('email');
+        setTimeout(() => {
+          setHasError('');
+        }, 2000);
+        setErrorMessage('Invalid email address');
+           }
           }} className={`btn`}>
             SEND CODE
             <div className="kdksa-ajwmd">

@@ -52,7 +52,7 @@ const router = createBrowserRouter([
 
   },
    {
-    path: '/preview/:id',
+    path: '/preview/:job_id',
     element: (
       <Suspense fallback={<LoadingComponent />}>
         <LazyApp />

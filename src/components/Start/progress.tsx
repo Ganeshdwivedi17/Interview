@@ -25,7 +25,7 @@ const ProgressForm = ({ setScreen,fromPreview,setMainScreen, jobViewContext,from
       });
 
       const config = { attributes: true };
-      observer.observe(targetElement, config);
+      observer.observe(targetElement, config);  
     }
   }, []);
 

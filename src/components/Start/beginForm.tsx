@@ -1,10 +1,12 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useFullscreen } from "../../hooks/useFullscreen";
+import { getAge } from "../../utils/validate-email";
+import profle_pic from "../../images/Profile Pic.svg"
 import CheckFormBox from "../CheckBoxForm";
 import Icons from "../icons";
 import axios from "axios";
-import { useEffect, useState } from "react";
 
 const BeginForm = ({ setScreen, jobViewContext, recorded, setMainScreen, className = '', setJobViewContext, setFromShareScreen }: { setScreen: any, jobViewContext: any, recorded: any, setMainScreen: any, className?: any, setJobViewContext: any, setFromShareScreen: any }) => {
 
@@ -30,6 +32,8 @@ const BeginForm = ({ setScreen, jobViewContext, recorded, setMainScreen, classNa
     return formData;
   }
 
+  console.log(jobViewContext);
+
   return (
     <div className={`kjjfds-janwkea1 kjjfds-janwkea2 white-form height-none ${className}`}>
       <div className='wave-box'>
@@ -38,7 +42,7 @@ const BeginForm = ({ setScreen, jobViewContext, recorded, setMainScreen, classNa
       <div className="kafms-kfsamfer">
         <div className="skfalk-smdsefds">
           <div className="kdjnfakdsfm-jsamre">
-            <img src={require("../../images/i5.png")} />
+            <img src={jobViewContext?.interviewer?.profile_image ? jobViewContext?.interviewer?.profile_image : profle_pic} style={{borderRadius:"50%"}} />
           </div>
           <div className="kjdflkads-mdskf">
             <h3>{jobViewContext?.job_title}</h3>
@@ -46,7 +50,7 @@ const BeginForm = ({ setScreen, jobViewContext, recorded, setMainScreen, classNa
               <Icons iconNumber={16} /> {jobViewContext?.job_recruiter || jobViewContext?.interviewer.company_name}
             </h5>
             <h6>
-              <Icons iconNumber={17} /> {jobViewContext?.interviewer.location}
+              <Icons iconNumber={17} />{!isNaN(getAge(jobViewContext?.interviewer.birth_date))?getAge(jobViewContext?.interviewer.birth_date):0}, &nbsp; {jobViewContext?.interviewer.location}
             </h6>
           </div>
         </div>

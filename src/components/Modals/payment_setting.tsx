@@ -34,8 +34,12 @@ const PaymentSetting = ({ show, handleClose }: { show: boolean, handleClose: any
   useEffect(() => {
     if (user) {
       axios.get(`${process.env.REACT_APP_BACKEND_URL}/stripe/${user?.id}`).then((res) => {
-        setPaymentData(res.data.stripeData[0])
-      }).catch((err) => err)
+        setPaymentData(res.data.stripeData[0]);
+        localStorage.setItem('subscribed', "true");
+      }).catch((err) => {
+        let res = err.response?.data?.message;
+        localStorage.setItem('subscribed', "false");
+      })
     }
   }, [user])
 

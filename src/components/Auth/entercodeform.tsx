@@ -5,6 +5,7 @@ import icon from "../../images/mail_circle.svg";
 const EnterCodeForm = ({ setshowScreen, className = '' }: { setshowScreen: any, className?: string }) => {
   const [isAgree, setisAgree] = useState(false);
 
+
   return (
     <div className={`kjjfds-janwkea ${className}`}>
       {/* <video className="bg-video" src={"/assets/blue_bg.mp4"} autoPlay loop muted></video> */}
@@ -39,7 +40,8 @@ const EnterCodeForm = ({ setshowScreen, className = '' }: { setshowScreen: any, 
           <div className="continueBtnDiv snasdj-sawdne">
             <button
               onClick={() => {
-                setshowScreen(7)
+                setshowScreen(2)
+
               }} className="btn kjlsjadm-kdmsd-2">
               RESET PASSWORD
               <Icons iconNumber={77} />
