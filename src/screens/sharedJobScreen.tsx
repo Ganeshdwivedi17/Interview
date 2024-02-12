@@ -50,7 +50,7 @@ const SharedJobScreen = ({ setMainScreen, setJobViewContext, setFromShareScreen,
     }
 
     return (
-        <div className="leftSideDiv rightSideBg pos-rel over-hdn auth-page d-flex justify-content-center align-items-center" style={{ width: "100%" }} id="parentDiv"  >
+        <div className="leftSideDiv rightSideBg pos-rel over-hdn auth-page d-flex justify-content-center align-items-center" style={{ width: "100%", height:"100vh" }} id="parentDiv"  >
 
             {shareScreen == 0 ?
                 <Welcome setShareScreen={setShareScreen} /> : shareScreen == 1 ?

@@ -27,9 +27,9 @@ function renderScreen(screen: number,fromPreview:any, setScreen: any, jobViewCon
   return (
     <>
       <BeginForm className={`m-0 flip-child flip-child-0 hover-anim`} setScreen={setScreen} jobViewContext={jobViewContext} recorded={recorded} setMainScreen={setMainScreen} setJobViewContext={setJobViewContext} setFromShareScreen={setFromShareScreen} />
-      <RecordFormParent className={`d-none m-0 flip-child flip-child-1`} fromShareScreen={fromShareScreen} setScreen={setScreen} jobViewContext={jobViewContext} recorded={recorded} setRecorded={setRecorded} />
+      <RecordFormParent className={`d-none m-0 flip-child flip-child-1`} fromShareScreen={fromShareScreen} setScreen={setScreen} jobViewContext={jobViewContext} screen={screen} recorded={recorded} setRecorded={setRecorded} />
       <FinishForm className={`d-none m-0 flip-child flip-child-2`} setScreen={setScreen} jobViewContext={jobViewContext} recorded={recorded} setRecorded={setRecorded} />
-      <ProgressForm fromShareScreen={fromShareScreen} setMainScreen={setMainScreen} fromPreview={fromPreview} className={`d-none m-0 flip-child flip-child-3`} setScreen={setScreen} jobViewContext={jobViewContext} recorded={recorded} setRecorded={setRecorded} />
+      <ProgressForm fromShareScreen={fromShareScreen} screen={screen} setMainScreen={setMainScreen} fromPreview={fromPreview} className={`d-none m-0 flip-child flip-child-3`} setScreen={setScreen} jobViewContext={jobViewContext} recorded={recorded} setRecorded={setRecorded} />
       <NextForm className={`d-none m-0 flip-child flip-child-4`} setScreen={setScreen} />
     </>
   )
@@ -101,7 +101,7 @@ function Next({ jobViewContext,fromPreview, setMainScreen, fromShareScreen, setJ
           {GetScreen(screen, setScreen, jobViewContext, recorded, setRecorded, setMainScreen)}
         </div> */}
           <div style={{ perspective: 1000, position: 'absolute' }}>
-            <div className={`flip-element`} style={{ height: 520 }}>
+            <div className={`flip-element`} id={`${screen===1 || screen==2?"flip-element":""}`}>
               {renderScreen(screen,fromPreview, setScreen, jobViewContext, recorded, setRecorded, setMainScreen, fromShareScreen, setJobViewContext, setFromShareScreen)}
             </div>
           </div>

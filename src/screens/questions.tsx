@@ -31,7 +31,7 @@ function View({ mainScreen,fromPreview, setMainScreen, setJobViewContext, setCha
       setShowScreen(_window?.setShowScreen);
       delete _window?.setShowScreen;
     }else if(fromPreview){
-setMainScreen(3)
+      setMainScreen(3)
     }
    
   }, []);
@@ -40,9 +40,10 @@ setMainScreen(3)
     if (jobView) {
       setJobViewContext(jobView)
     }
-  }, [jobView])
+  }, [jobView, showRightMenu])
  
   localStorage.setItem('JobView', JSON.stringify(jobView || jobViewContext));
+  
   return (
     <LinearBackground style={{ width: '100%' }}>
       <div className="pageContainer" style={{ padding: 0, gap: 0 }}>

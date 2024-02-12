@@ -151,7 +151,7 @@ const DemoScreen = ({ setMainScreen, mainScreen = '', setJobViewContext }: { set
             </svg>
           </div>
           <div className="dkfnmsd-awde">
-            <div className="wh-100 l1" style={{ right: '25%' }}>
+            <div className="wh-100 l1" style={{ right: '33.6%' }}>
               <VideoForm />
             </div>
             <div className="wh-100 l2" style={{ left: '25%' }}>

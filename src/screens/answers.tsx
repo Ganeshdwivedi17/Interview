@@ -32,7 +32,8 @@ function View({ mainScreen,setJobViewContext, setMainScreen, setChatUser, jobVie
   const [selectedInterview, setSelectedInterview] = useState<any>(null);
   const handleFilterClose = () => setShowFilter(false);
   const handleFilterShow = () => setShowFilter(true);
-
+  const [AnswerfilteredInterviews,AnswerSetfilteredInterviews] = useState<any>(null);
+  
 
   const JOBTITLE = localStorage.getItem('JobTitle') ?localStorage.getItem('JobTitle') : "";
 
@@ -103,7 +104,7 @@ function View({ mainScreen,setJobViewContext, setMainScreen, setChatUser, jobVie
           {showScreen != 1 ? (
             <div className="leftsidediv leftsideWhithTransparentBg" style={{ height: 800 }}>
               {
-                showScreen == 0 ? <MainForm setJobViewContext={setJobViewContext} setMainScreen={setMainScreen} showScreen={showScreen} setshowScreen={setshowScreen} selectedFilter={selectedFilter} setSelectedInterview={setSelectedInterview} allInterviews={mainAllInterviews} setAllInterviews={setMainAllInterviews} jobViewContext={jobViewContext} watchAns={watchAns} />
+                showScreen == 0 ? <MainForm AnswerSetfilteredInterviews={AnswerSetfilteredInterviews} AnswerfilteredInterviews={AnswerfilteredInterviews} setJobViewContext={setJobViewContext} setMainScreen={setMainScreen} showScreen={showScreen} setshowScreen={setshowScreen} selectedFilter={selectedFilter} setSelectedInterview={setSelectedInterview} allInterviews={mainAllInterviews} setAllInterviews={setMainAllInterviews} jobViewContext={jobViewContext} watchAns={watchAns} />
                   : <><FormMessage showScreen={showScreen} setshowScreen={setshowScreen} /></>
               }
               {
@@ -142,7 +143,7 @@ function View({ mainScreen,setJobViewContext, setMainScreen, setChatUser, jobVie
               </defs>
             </svg>
             </div>
-            <TestiMonials setChatUser={setChatUser} selectedInterview={selectedInterview} setAllInterviews={setMainAllInterviews} setshowScreen={setshowScreen} setMainScreen={setMainScreen} />
+            <TestiMonials AnswerfilteredInterviews={AnswerfilteredInterviews} setChatUser={setChatUser} selectedInterview={selectedInterview} setAllInterviews={setMainAllInterviews} setshowScreen={setshowScreen} setMainScreen={setMainScreen} />
             <div className="lkljdfsl-sifkmd" style={{ width: 'auto', right: 25 }} onClick={nextInterview}>
               {/* <Icons iconNumber={67} /> */}
               <svg width="54" height="53" viewBox="0 0 54 53" fill="none" xmlns="http://www.w3.org/2000/svg">

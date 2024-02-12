@@ -28,11 +28,11 @@ function App() {
   const [fromShareScreen, setFromShareScreen] = useState(false)
   const params = useParams()
   const { setShared, setSharedJobData } = useShared()
-const [fromPreview, setFromPreview] = useState(false)
- const [fromforgetPassword,setFromForgetPassword] = useState(false)
+  const [fromPreview, setFromPreview] = useState(false)
+  const [fromforgetPassword,setFromForgetPassword] = useState(false)
 
   useEffect(() => {
-     window.localStorage.removeItem('shared')
+    window.localStorage.removeItem('shared')
     const { job_id } = params;
     const {id} = params;
    
@@ -46,7 +46,7 @@ const [fromPreview, setFromPreview] = useState(false)
       })
      
   }
- console.log(fromShareScreen)
+
   }, [params])
 
   

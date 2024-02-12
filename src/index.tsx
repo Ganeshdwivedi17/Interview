@@ -12,6 +12,7 @@ import LinkedinAuth from './pages/linkedinAuth';
 import { LinkedInCallback } from "react-linkedin-login-oauth2";
 import LoadingComponent from './components/LoadingComponent';
 import BeginForm from './components/Start/beginForm';
+import PaymentCard from './components/Answers/PaymentCard';
 
 const LazyApp = lazy(() => import('./App'));
 const LazyLinkedInCallback = lazy(() => import('./pages/linkedinAuth'));
