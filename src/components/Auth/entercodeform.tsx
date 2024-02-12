@@ -21,7 +21,7 @@ const EnterCodeForm = ({ setshowScreen, className = '' }: { setshowScreen: any, 
   };
    const email = window.localStorage.getItem('UserEmail');
    const getEmail = async() => {
-  const response = await axios.post(`${process.env.REACT_APP_PASSWORD_URL}/users/verfiyOtp`,{email,otp:otp.join('')})
+  const response = await axios.post(`${process.env.REACT_APP_PASSWORD_URL}users/verfiyOtp`,{email,otp:otp.join('')})
   console.log(response);
   if(response.data.message == "OTP Verified Successfully"){
     setshowScreen(2)
