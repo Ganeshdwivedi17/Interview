@@ -14,7 +14,7 @@ const ForgotPwdForm = ({ setshowScreen,setErrorMessage, className = '' }: { sets
   };
 
     const getEmail = async() => {
-    const response = await axios.post(`${process.env.REACT_APP_PASSWORD_URL}/users/forget-password`,{email})
+    const response = await axios.post(`${process.env.REACT_APP_PASSWORD_URL}users/forget-password`,{email})
     console.log(response.data);
     if(response.data.message == "email sent successfully"){
       setshowScreen(6)
