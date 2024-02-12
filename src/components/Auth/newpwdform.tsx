@@ -59,7 +59,7 @@ const NewPwdForm = ({ setshowScreen,fromforgetPassword, className = '', handleFo
            const email = window.localStorage.getItem('UserEmail');
           const password = signUpFormData?.password
           
-       const response  = await axios.post(`${process.env.REACT_APP_PASSWORD_URL}/users/update-password`,{email,password})
+       const response  = await axios.post(`${process.env.REACT_APP_PASSWORD_URL}users/update-password`,{email,password})
         console.log(response.data)
         if(response.data.message == "password changed successfully")
           setshowScreen(4);
