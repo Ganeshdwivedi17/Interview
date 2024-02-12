@@ -19,14 +19,13 @@ const navigate = useNavigate();
 useEffect(() => {
  if(LocalStorageJobView !== (undefined || null)){
   const {_id} = JSON.parse(LocalStorageJobView)
-  console.log(_id)
   setID(_id || id)
   }
 }, [])
 
 
   return <div className={`kljadjfkl-jaem ${hideMenu ? "jkdslfsae" : isTab ? "lkhdfjksj-ajenw" : ""}`} style={style} >
-    <Link to={`${process.env.REACT_APP_FRONTEND_URL}/preview/${ID}`} target="_blank">
+      <Link to={`${process.env.REACT_APP_FRONTEND_URL}/preview/${ID}`} target="_blank">
           <button className="no-shadow circleButtons" onClick={() => {
         }
       }>

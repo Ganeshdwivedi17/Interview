@@ -3,6 +3,7 @@ import Icons from "../../components/icons";
 import { useMediaQuery } from 'react-responsive'
 import { errorByKey } from "../../helper";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import axios from "axios";
 
 const NewPwdForm = ({ setshowScreen,fromforgetPassword, className = '', handleFormChange, signUpFormErrors, setErrorMessage = null, signUpFormData = {} }: { setshowScreen: any, className?: string, handleFormChange: any, signUpFormErrors: any, setErrorMessage?: any, signUpFormData?: any, fromforgetPassword:any }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
@@ -30,7 +31,8 @@ const NewPwdForm = ({ setshowScreen,fromforgetPassword, className = '', handleFo
     }
   }, [signUpFormErrors]);
 
-  const handleContinue = () => {
+  const handleContinue = async() => {
+   
     if (typeof setErrorMessage === 'function') {
       if (!signUpFormData?.password?.length) {
         setHasError('password');
@@ -53,20 +55,36 @@ const NewPwdForm = ({ setshowScreen,fromforgetPassword, className = '', handleFo
       } else {
         setHasError('');
         setErrorMessage('');
-        if(fromforgetPassword){
+         if(fromforgetPassword){
+           const email = window.localStorage.getItem('UserEmail');
+          const password = signUpFormData?.password
+          
+       const response  = await axios.post(`${process.env.REACT_APP_PASSWORD_URL}/users/update-password`,{email,password})
+        console.log(response.data)
+        if(response.data.message == "password changed successfully")
           setshowScreen(4);
         }else{
         setshowScreen(3);
         }
       }
     } else {
-      if(fromforgetPassword){
+       if(fromforgetPassword){
+           const email = window.localStorage.getItem('UserEmail');
+          const password = signUpFormData?.password
+          
+       const response  = await axios.post(`${process.env.REACT_APP_PASSWORD_URL}/users/update-password`,{email,password})
+        console.log(response.data)
+        if(response.data.message == "password changed successfully")
           setshowScreen(4);
         }else{
         setshowScreen(3);
         }
     }
+    
   };
+
+
+
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);

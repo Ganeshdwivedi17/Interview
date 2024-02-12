@@ -30,7 +30,7 @@ const ViewForm = ({ setMainScreen, setShowScreen, setPastScreen, jobView, setCha
       })
       .catch(console.error)
   }
-
+ 
   return (
     <Flip direction="vertical">
       <div className="jkljfkld-jdskfe">

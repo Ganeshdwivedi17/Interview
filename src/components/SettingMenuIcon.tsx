@@ -138,7 +138,6 @@ const SettingMenuIcon = ({ setMainScreen }: { setMainScreen: any }) => {
               style={{ width: 95, height: 95 }}
             />
             <h5>{user?.name}</h5>
-            <div className="desc"><img src={age_img} width='15px' height="15px" /> {age?age:0} years</div>
             <div className="desc"><img src={company_img} /> {user?.company_name}</div>
             <div className="desc"><img src={location_img} /> {user?.location}</div>
           </div>
@@ -163,7 +162,7 @@ const SettingMenuIcon = ({ setMainScreen }: { setMainScreen: any }) => {
               <Icons iconNumber={100} />Contact Us
             </div>
           </div>
-          <div onClick={handleLogoutShow} className='text-center logout'>
+          <div style={{margin:"10px"}} onClick={handleLogoutShow} className='text-center logout'>
             <span>LOG OUT</span>
           </div>
         </div></div>)}

@@ -14,8 +14,12 @@ const ForgotPwdForm = ({ setshowScreen,setErrorMessage, className = '' }: { sets
   };
 
     const getEmail = async() => {
-const response = await axios.post(`http://localhost:4000/users/forget-password`,{email})
-console.log(response);
+    const response = await axios.post(`${process.env.REACT_APP_PASSWORD_URL}/users/forget-password`,{email})
+    console.log(response.data);
+    if(response.data.message == "email sent successfully"){
+      setshowScreen(6)
+    }
+    window.localStorage.setItem("UserEmail",email);
   }
 
   return (
@@ -48,9 +52,9 @@ console.log(response);
           <button onClick={() => {
            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
            const isValidEmail = emailRegex.test(email);
+          
            if(isValidEmail){ 
-           setshowScreen(6)
-           getEmail()
+              getEmail()
            }else{
              setHasError('email');
         setTimeout(() => {

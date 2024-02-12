@@ -6,7 +6,7 @@ import Icons from "../icons";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 
-const SignIn = ({ setShareScreen, setMainScreen, setFromShareScreen }: { setShareScreen: any, setMainScreen: any, setFromShareScreen: any }) => {
+const SignIn = ({ setShareScreen, setMainScreen, setFromShareScreen,className = ''  }: { setShareScreen: any, setMainScreen: any, setFromShareScreen: any,className?: string }) => {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
     const [isAgree, setisAgree] = useState(true);
     const [siginInForm, setSignInForm] = useState({
@@ -30,11 +30,11 @@ const SignIn = ({ setShareScreen, setMainScreen, setFromShareScreen }: { setShar
       setShowPassword(!showPassword);
     };
     return (
-        <div className={`${isTabletOrMobile ? "kjjfds-janwkea" : "kjjfds-janwkea1 kjjfds-janwkea2"} white-form `} style={{ marginTop: "100px", marginBottom: "140px" }}>
+        <div className={`${className} ${isTabletOrMobile ? "kjjfds-janwkea" : "kjjfds-janwkea1 kjjfds-janwkea2"} white-form `} style={{ marginTop: "100px", marginBottom: "140px", marginLeft:0 }}>
             <div className='wave-box'>
                 <div className='wave'></div>
             </div>
-            <div className={`jhjij-sanwe ${isTabletOrMobile ? "klhdlfj-ajee2" : ""} email-login-form`}>
+            <div className={`jhjij-sanwe ${isTabletOrMobile ? "klhdlfj-ajee2" : ""} email-login-form`} style={{paddingTop: 140 }}>
                 <h3 className={`${isTabletOrMobile ? "" : "hkjsda-jesa"}`}>Enter Login Details</h3>
                 <h4>Enter your email and password for this account.</h4>
 

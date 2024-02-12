@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Icons from "../icons";
 import ProgressCircle from './progressCircle'
 
-const ProgressForm = ({ setScreen,fromPreview,setMainScreen, jobViewContext,fromShareScreen, recorded, setRecorded, className = '' }: { setScreen: any, jobViewContext: any, recorded: any, setRecorded: any, className?: any,fromPreview?:any,setMainScreen?:any,fromShareScreen?:any }) => {
+const ProgressForm = ({ setScreen,fromPreview, screen,setMainScreen, jobViewContext,fromShareScreen, recorded, setRecorded, className = '' }: { setScreen: any,screen:number, jobViewContext: any, recorded: any, setRecorded: any, className?: any,fromPreview?:any,setMainScreen?:any,fromShareScreen?:any }) => {
   const [shouldDisplay, setShouldDisplay] = useState(false);
 
   useEffect(() => {
@@ -26,11 +26,11 @@ const ProgressForm = ({ setScreen,fromPreview,setMainScreen, jobViewContext,from
 
       const config = { attributes: true };
       observer.observe(targetElement, config);  
-    }
+    }   
   }, []);
 
   return (
-    <div id="targetElementProgress" className={`kjjfds-janwkea knlsdj0wjew ${className}`} style={{ cursor: 'pointer', height: 520, width: 320 }}>
+    <div id="targetElementProgress" className={`kjjfds-janwkea knlsdj0wjew ${className}`} style={{ cursor: 'pointer' }}>
       {/* <video className="bg-video" src={"/assets/blue_bg.mp4"} autoPlay loop muted></video> */}
       <div className='wave-box'>
         <div className='wave'></div>

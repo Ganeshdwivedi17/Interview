@@ -148,7 +148,8 @@ const CreateForm = ({
     // <Fade direction="left" big>
     <div className="kjkndask-ankdnwd" style={{ position: 'fixed', borderRadius: 0, left: 0, top: 0 }}>
       <div
-        className={`leftSideHeader kjsfdkl-adsj ${showScreen >= 3 ? "w-50" : ""}`}
+        className={`leftSideHeader kjsfdkl-adsj ${showScreen >= 3 ? "w-50" : ""}`} 
+        id='mobile-kjsfdkl-adsj'
         style={{ padding: '18px 0 18px 20px' }}
       >
         <div
@@ -192,7 +193,7 @@ const CreateForm = ({
         )}
       </div>
       <div className={`kjdfkksd-aweinmd hkasjfdlmf-dsfsd align-items-start ${showScreen == 3 ? "kdjsf-awejdn" : showScreen == 5 ? "kdjsf-awejdn" : ""}`}>
-        <div className="absolute top-0 left-0 w-50" style={{marginLeft:26}}>
+        <div className="absolute top-0 left-0 w-50" id="mobile-kjdfkksd-aweinmd" style={{marginLeft:26}} >
           <div className="kjdsfms-awddw2 d-flex align-items-center justify-content-center">
             <Icons iconNumber={36} />
             <Icons iconNumber={showScreen >= 2 ? 36 : 37} />
@@ -219,7 +220,7 @@ const CreateForm = ({
                 : showScreen == 2
                   ? "ENTER RECRUITER NAME"
                   : showScreen == 3
-                    ? "SELECT 3 QUESTIONS YOU’D LIKE TO ASK"
+                    ? `${selected} of 3 QUESTIONS SELECTED`
                     : showScreen == 4
                       ? "ENTER QUESTION"
                       : showScreen == 5

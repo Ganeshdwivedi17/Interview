@@ -18,7 +18,7 @@ const QuestionForm = ({ setMainScreen, setShowScreen, setJobView, myQuestions }:
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 15; // Number of jobs per page
   const [showMore, setShowMore] = useState(false);
-
+ 
   useEffect(() => {
     getJobs();
   }, [myQuestions, currentPage]);
@@ -76,7 +76,7 @@ setCurrentPage(currentPage +1)
       {myQuestions ? (
         <>
           {jobs?.length ? (
-            <div className="h-auto" style={{ display: 'grid', gap: '6px' }}>
+            <div className="h-auto job-card-mobile" style={{ display: 'grid', gap: '6px' }} id="job-card-mobile">
               {currentJobs?.map((data: any, index: any) => (
                 <JobTitle key={index} setMainScreen={setMainScreen} setShowScreen={setShowScreen} showMessage={false} jobData={data} setJobView={setJobView} />
               ))}

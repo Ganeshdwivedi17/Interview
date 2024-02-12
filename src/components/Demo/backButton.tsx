@@ -14,7 +14,7 @@ const BackButton = ({ setMainScreen,setJobViewContext }: { setMainScreen: any,se
         </button>
         <h5 className="mksaldkamaw-jdwa">Back</h5>
       </div>
-      <button
+      <button 
         onClick={() => {
           setMainScreen(0);
           setJobViewContext(null)

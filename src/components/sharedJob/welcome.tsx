@@ -1,7 +1,7 @@
 
 import Icons from "../icons"
-import SimpleCheckBox from "../simpleCheck"
-
+import SimpleCheckBox from "../simpleCheck";
+import Get_Start from "../../images/start.png";
 
 const Welcome = ({ setShareScreen, }: { setShareScreen: any }) => {
     return (
@@ -40,13 +40,16 @@ const Welcome = ({ setShareScreen, }: { setShareScreen: any }) => {
                             If you run out of things to say, just click the {" "}
                             <span>Stop</span> button to end your answer at any time.
                         </h5>
-                    </div>
+                    </div> 
                     <div className="createVideoInterviewBtnDiv ml-0">
                         <button className="btn no-shadow asjdsajde ml-0" onClick={() => {
                             //   setMainScreen(0);
                             setShareScreen(1)
                             //   setShowScreen(0);
-                        }}>Get Started</button>
+                        }}>
+                            <span>Get Started</span>
+                            <img src={Get_Start} alt="get_start" />
+                        </button>
                     </div>
                 </div>
             </div>

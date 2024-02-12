@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useFullscreen } from "../../hooks/useFullscreen";
 import SearchFilter from "../Modals/SearchFilter";
 import Icons from "../icons";
@@ -16,9 +17,18 @@ const BackMenu = ({
   showRightMenu?: any;
   setShowRightMenu?: any;
 }) => {
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1013px)' })
-  const isMobile = useMediaQuery({ query: '(max-width: 425px)' })
-  const { fullscreen, setFullscreen } = useFullscreen();
+  const isTabletOrMobile = useMediaQuery({ query: '(min-width: 20px)' })
+  const isMobile = useMediaQuery({ query: '(max-width: 425px)' });
+  const [ fullscreen, setFullscreen ] = useState<boolean>(false);
+
+  const handleClick = () => {
+    setShowRightMenu(!showRightMenu);
+    setFullscreen(!fullscreen);
+  }
+
+  useEffect(()=>{
+    
+  },[fullscreen])
 
   return (
     <div className={`leftSideHeader ${showScreen == 5 && isMobile ? "jdafk-aewkmw" : ""}`} style={{ position: 'absolute', top: 0, width: '100%' }}>
@@ -30,16 +40,15 @@ const BackMenu = ({
             <span style={{ fontSize: fullscreen ? 30 : 20, fontWeight: 400, marginRight: 5 }}>{fullscreen ? '-' : '+'}</span>
             Full Screen
           </button>
-        ) : (
+        ) : ( 
           <></>
         )} */} 
         {
-          isTabletOrMobile && showScreen == 6 ?
+         showScreen == 6 ?
             <button
-              onClick={() => {
-                setShowRightMenu(!showRightMenu)
-              }}
-              className={`kjlma0o-dwa ${showRightMenu ? "sdsds" : ""}`}
+              onClick={handleClick}
+              className={`kjlma0o-dwa ${fullscreen ? "sdsds" : ""}`}
+              style={{background:fullscreen? "white":"blue", color: fullscreen?"blue":"white"}}
             >
               <Icons iconNumber={61} />
               Options{" "}
@@ -47,12 +56,12 @@ const BackMenu = ({
             : <button
               onClick={() => {
                 setShowScreen(1);
-                  setJobViewContext(null)
+                setJobViewContext(null)
               }}
-              className="kjlma0o-dwa jksdalfj-jasidm" style={{ width: 150, marginLeft: 10 }}
-            >
+              className="kjlma0o-dwa" style={{ width: '150', marginLeft: 10 }}
+            > 
               <Icons iconNumber={30} /> 
-              Create Interview
+              <span className="jksdalfj-jasidm" id="jksdalfj-jasidm">Create Interview</span>
             </button>
         }
       </div>
@@ -60,4 +69,4 @@ const BackMenu = ({
     </div>
   );
 }; 
-export default BackMenu
+export default BackMenu;

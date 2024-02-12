@@ -1,9 +1,10 @@
 import { Toast, ToastContainer } from "react-bootstrap";
 
-const Notify = ({ type = "info", title = "notification", show = true, handleClose = null, classes = '' ,autoHide = true}: { type?: string, title?: any, show?: boolean, handleClose?: any, classes?: any,autoHide?: boolean, }) => {
+const Notify = ({ type = "info", title = "notification", 
+show = true, handleClose = null, classes = '' ,autoHide = true, style}: { type?: string, title?: any, show?: boolean, handleClose?: any, classes?: any,autoHide?: boolean, style?: React.CSSProperties; }) => {
   
   return (
-    <ToastContainer className={classes}>
+    <ToastContainer className={classes} style={style}>
       <Toast className={`toast-notify ${type}`} onClose={handleClose} show={show} delay={5000} autohide={autoHide} style={{ marginTop: 15, marginRight: 15 }}>
         <Toast.Header className="text-white">
           <img className="rounded-0" src={require(`../images/Tick-${type}.svg`)} />

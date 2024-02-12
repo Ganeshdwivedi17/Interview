@@ -11,12 +11,6 @@ const TinyModal = ({ show, handleClose, type, setMainScreen, jobView, setshowScr
   const [notifyMessage, setNotifyMessage] = useState('')
   const [deleteNotify, setDeleteNotify] = useState(false);
 
-  useEffect(() => {
-    if (show && type == "delete_interview") {
-      $(".modal-backdrop").css("opacity", 0);
-    }
-  }, [show]);
-
   const getByType = () => {
     switch (type) {
       case "delete_account":
@@ -53,19 +47,25 @@ const TinyModal = ({ show, handleClose, type, setMainScreen, jobView, setshowScr
           classes: ''
         }
       case "delete_interview":
+
         return {
           title: 'Delete Interview',
           message: 'Are you sure want to delete this interview?',
           confirmText: 'Delete',
           onConfirm: () => {
-              axios.delete(`${process.env.REACT_APP_BACKEND_URL}/interviewer/${jobView?._id}`).then((res) => {
-                setshowScreen(0)
+            axios.delete(`${process.env.REACT_APP_BACKEND_URL}/interviewer/${jobView?._id}`).then((res) => {
+              handleClose()
+              setTimeout(function () {
                 setMainScreen(1)
-               
-               handleClose()
-             })
-            
-            
+                setshowScreen(0)
+              }, 500);
+
+
+
+
+
+            })
+
           },
           classes: 'del-interview-modal'
         }
@@ -75,7 +75,9 @@ const TinyModal = ({ show, handleClose, type, setMainScreen, jobView, setshowScr
           message: 'Are you sure want to delete this interview?',
           confirmText: 'Delete',
           onConfirm: () => {
+
             axios.delete(`${process.env.REACT_APP_BACKEND_URL}/interviews/${jobView?.id}`).then((res) => {
+
               handleClose()
               setMainScreen(2)
               if (typeof setshowScreen === 'function') {

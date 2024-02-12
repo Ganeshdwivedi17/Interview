@@ -40,7 +40,7 @@ const CheckFormBox = ({ questions, forcedActive = false, recorded = [], noAction
       //   }
       // }}
       className="kadfmsod-wem sadamodajm-e dsjskd-kads no-shadow check-item"
-      style={{ width: 303 }}
+      style={{ width: 295.7 }}
     >
       <div>
         <Icons iconNumber={isActive > 0 || _isActive(question?._id) ? 15 : 24} />

@@ -4,7 +4,7 @@ import Icons from "../icons";
 import Back from "./Back";
 
 const TopSec = ({ setMainScreen,setJobViewContext, showScreen, setshowScreen, showFilter, handleFilterShow, handleFilterClose, selectedFilter, setSelectedFilter }: { setMainScreen: any, showScreen: number, setshowScreen: any, showFilter: boolean, handleFilterShow: any,setJobViewContext:any, handleFilterClose: any, selectedFilter: any, setSelectedFilter: any }) => {
-
+ 
 
   return <>
     <div className="leftSideHeader" style={{ position: 'absolute', top: 0, width: '100%' }}>
@@ -15,7 +15,7 @@ const TopSec = ({ setMainScreen,setJobViewContext, showScreen, setshowScreen, sh
             <Icons iconNumber={91} />
           </h5>
         </div>
-
+ 
         <button
           onClick={() => {
             const _window: any = window;
@@ -26,7 +26,7 @@ const TopSec = ({ setMainScreen,setJobViewContext, showScreen, setshowScreen, sh
           className="kjlma0o-dwa jksdalfj-jasidm" style={{ width: 150, marginLeft: 10 }}
         >
           <Icons iconNumber={30} />
-          Create Interview
+          <span id='answer-mobile-interview'>Create Interview</span>
         </button>
       </div>
       <SearchFilter show={showFilter} handleClose={handleFilterClose} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
@@ -34,9 +34,3 @@ const TopSec = ({ setMainScreen,setJobViewContext, showScreen, setshowScreen, sh
   </>
 }
 export default TopSec
-
-
-/* console.log("called removeJobView")
-    const object ={}
-    localStorage.setItem('jobViewContext',JSON.stringify(object))
-    */

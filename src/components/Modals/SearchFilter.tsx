@@ -23,7 +23,8 @@ const SearchFilter = ({ show, handleClose, selectedFilter, setSelectedFilter }: 
         )}
     <Modal 
     className="modal-primary filter-modal bg-transparent" 
-    show={show} backdrop={false} onHide={handleClose} centered contentClassName="filters-modal-css"
+    id='modal-filter'
+    show={show} backdrop={false} onHide={handleClose} centered contentClassName="filters-modal-css sds"
     
     >
       <Modal.Header>

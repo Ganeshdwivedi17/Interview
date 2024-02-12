@@ -1,9 +1,35 @@
 import Icons from "../icons"
 import { getAge } from "../../utils/validate-email";
-import profile_pic from "../../images/Profile Pic.svg"
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import $ from 'jquery';
+import { useAuth } from "../../hooks/useAuth";
 
-const Card = ({ showFav, setMainScreen, showScreen, setshowScreen, interview, handleFilteration, setSelectedInterview }: { showFav?: boolean, setMainScreen: any, showScreen: number, setshowScreen: any, interview: any, handleFilteration: any, setSelectedInterview: any }) => {
+
+const Card = ({ showFav, setMainScreen,VideoIndex, showScreen, setshowScreen, interview, handleFilteration, setSelectedInterview }: { showFav?: boolean, setMainScreen: any, showScreen: number, setshowScreen: any, interview: any, handleFilteration: any, setSelectedInterview: any,VideoIndex:any }) => {
+
+
+  const { user, setUser } = useAuth();
+  const subscribed = localStorage.getItem("subscribed");
+  const role = user?.chat?.user?.users[user.id].role;
+
+
+  useEffect(() => {
+    $('.overlay.btn-close').hide();
+    $('.overlay.btn-close').click(function () {
+      // @ts-ignore
+      $(this).hide();
+    });
+
+    $('.btn-show').click(function () {
+      $('.overlay.btn-close').show();
+    });
+
+    $(window).click(function (event) {
+      if ($('.overlay.show').length === 0) {
+        $('.overlay.btn-close').hide();
+      }
+    });
+  }, []);
 
   const svgBackground = `
   <svg xmlns="http://www.w3.org/2000/svg" width="120" height="226" viewBox="0 0 120 226" fill="none">
@@ -12,28 +38,31 @@ const Card = ({ showFav, setMainScreen, showScreen, setshowScreen, interview, ha
   </svg>
   `;
 
-  const [Load,setLoad] = useState(false);
-
-  useEffect(() => {
- 
-}, [Load])
-
-
   return <div onClick={() => {
-    setSelectedInterview(interview);
-  }} className="candidateCard" style={{ height: 226, width: 120, background: `url("data:image/svg+xml,${encodeURIComponent(svgBackground)}")` }}>
- {/* {Load &&interview.videoLink ? (
+    if(VideoIndex < 3){
+       setSelectedInterview(interview);
+      }else if(subscribed==="false" && role==="user"){
+        // $('.overlay').hide();
+        // setShowPayment(true);
+      }
+      
+    }} className="candidateCard" style={{ height: 226, width: 120, background: `url("data:image/svg+xml,${encodeURIComponent(svgBackground)}")` }}>
+    {/* {Load &&interview.videoLink ? (
     <video onLoadedMetadata={()=> setLoad(true)} style={{ position: 'relative', borderRadius: 7, background: 'rgba(0,0,0,0.6)', marginTop: 1 }} width={116} height={214}
       src={interview.videoLink}
     />):
     ( */}
     {/* Used image instead of video */}
-            <img src={require("../../images/i6.png")} style={{ position: 'relative', borderRadius: 7, width:"116", height:"214", top: '0.75%' }} />
-          {/* )
-         } */}
+      <img src={require("../../images/i6.png")} style={{ position: 'relative', borderRadius: 7, width:"116", height:"214", top: '0.75%' }} />
+    {/* )
+    } */}
+
+
     <div className="cardInfoDiv" style={{ padding: '0px 5px 0px 7px', display:"flex", alignItems:"center", gap:"5px" }}>
-      <div style={{height: '20px', width:'20px', borderRadius:'50%'}}><img src={interview?.interviewee?.profile_image?interview?.interviewee?.profile_image:profile_pic} alt="profile" style={{ borderRadius:'50%'}} height='100%' width='100%' /></div>
-        <div>
+      {/* <div style={{height: '20px', width:'20px', borderRadius:'50%'}} id='card-image-mobile'>
+        <img src={interview?.interviewee?.profile_image?interview?.interviewee?.profile_image:profile_pic} alt="profile" style={{ borderRadius:'50%'}} height='100%' width='100%' />
+      </div> */}
+      <div>
         <div className="intervieweeName" >
         {/* Steven Aubrey */}
           {interview?.interviewee?.name}
@@ -41,7 +70,6 @@ const Card = ({ showFav, setMainScreen, showScreen, setshowScreen, interview, ha
         <div className="intervieweeDetail">
           <Icons iconNumber={32} />
           <span>
-          {/* 36, London, UK */}
           {getAge(interview?.interviewee?.birth_date )}, &nbsp;
           {interview?.interviewee?.location}
           </span>

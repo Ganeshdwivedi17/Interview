@@ -8,7 +8,7 @@ import { useAuth } from "../../hooks/useAuth";
 import authConfig from '../../configs/auth';
 import { useFullscreen } from "../../hooks/useFullscreen";
 
-const SharedLogin = ({ setShareScreen, setMainScreen, setFromShareScreen }: { setShareScreen: any, setMainScreen: any, setFromShareScreen: any }) => {
+const SharedLogin = ({ setShareScreen, setMainScreen, setFromShareScreen,className = '' }: { setShareScreen: any, setMainScreen: any, setFromShareScreen: any,className?: string }) => {
     const { setUser } = useAuth();
     const { setFullscreen } = useFullscreen()
     const [isHoverOrActive, setisHoverOrActive] = React.useState(false);
@@ -53,7 +53,7 @@ const SharedLogin = ({ setShareScreen, setMainScreen, setFromShareScreen }: { se
 
     return (
 
-        <div className={`kjjfds-janwkea`} style={{ marginTop: "100px", marginBottom: "140px" }}>
+        <div className={`kjjfds-janwkea ${className}`} style={{ marginTop: "100px", marginBottom: "140px" }}>
             {/* <video className="bg-video" src={"/assets/blue_bg.mp4"} autoPlay loop muted></video> */}
             <div className='wave-box'>
                 <div className='wave'></div>

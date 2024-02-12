@@ -67,7 +67,7 @@ const JobTitle = ({ setMainScreen, setShowScreen, showMessage, jobData, setJobVi
           </div>
         </div>
       </div>
-      <div>
+      <div className="pills-option-mobile">
         {selected > 0 ? (
           <button onMouseLeave={() => setselected(0)} className={`jklsjdnsa-jdw ${selected == 1 ? "a82" : selected == 2 ? "a83" : "a84"}`}>
             <Icons iconNumber={selected == 1 ? 82 : selected == 2 ? 83 : 84} />

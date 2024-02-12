@@ -1,10 +1,37 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Icons from "../icons";
 import icon from "../../images/mail_circle.svg";
+import axios from "axios";
 
 const EnterCodeForm = ({ setshowScreen, className = '' }: { setshowScreen: any, className?: string }) => {
   const [isAgree, setisAgree] = useState(false);
+  const [otp, setOtp] = useState(['', '', '', '', '']);
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const handleChange = (index: number, value: string) => {
+    if (value === '' || /^[^\s]+$/.test(value)) {
+      const newOtp = [...otp];
+      newOtp[index] = value;
+      setOtp(newOtp);
 
+      // Move to the next input
+      if (value !== '' && index < 4) {
+        inputRefs.current[index + 1]?.focus();
+      }
+    }
+  };
+   const email = window.localStorage.getItem('UserEmail');
+   const getEmail = async() => {
+  const response = await axios.post(`${process.env.REACT_APP_PASSWORD_URL}/users/verfiyOtp`,{email,otp:otp.join('')})
+  console.log(response);
+  if(response.data.message == "OTP Verified Successfully"){
+    setshowScreen(2)
+  } 
+ }
+
+useEffect(() => {
+    // Focus on the first input when the component mounts
+    inputRefs.current[0]?.focus();
+  }, []);
 
   return (
     <div className={`kjjfds-janwkea ${className}`}>
@@ -21,11 +48,17 @@ const EnterCodeForm = ({ setshowScreen, className = '' }: { setshowScreen: any, 
 
         <div className="njskakd-kawmed">
           <div className="emailRowDiv sadhasdn-we d-inline-flex flex-row">
-            <div className="jknu-kosaember"><input /></div>
-            <div className="jknu-kosaember"><input /></div>
-            <div className="jknu-kosaember"><input /></div>
-            <div className="jknu-kosaember"><input /></div>
-            <div className="jknu-kosaember"><input /></div>
+           {otp.map((digit, index) => (
+            <div className="jknu-kosaember" key={index}>
+              <input
+                type="text"
+                maxLength={1}
+                value={digit}
+                onChange={(e) => handleChange(index, e.target.value)}
+                ref={(el) => (inputRefs.current[index] = el)}
+              />
+            </div>
+          ))}
           </div>
           <div className="jdaskfjnas-ajaied mt-2 px-4">
             <div onClick={() => {
@@ -40,8 +73,7 @@ const EnterCodeForm = ({ setshowScreen, className = '' }: { setshowScreen: any, 
           <div className="continueBtnDiv snasdj-sawdne">
             <button
               onClick={() => {
-                setshowScreen(2)
-
+                getEmail()
               }} className="btn kjlsjadm-kdmsd-2">
               RESET PASSWORD
               <Icons iconNumber={77} />

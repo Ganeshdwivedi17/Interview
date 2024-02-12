@@ -171,7 +171,7 @@ const RecordForm = ({ setScreen, jobViewContext, recorded, setRecorded, classNam
     return (
       <>
         <div>
-          <Webcam mirrored={true} audio={true} style={{ borderRadius: '20px', position: 'relative' }} videoConstraints={videoConstraints} ref={webcamRef} />
+          <Webcam mirrored={true} audio={true} style={{ borderRadius: '20px', position: 'relative' }} videoConstraints={videoConstraints} ref={webcamRef} id='mobile-recording-fit' />
         </div>
         <div
           className='btn khjn-jnkawed' onClick={() => {

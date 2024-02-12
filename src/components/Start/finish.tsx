@@ -58,7 +58,7 @@ const FinishForm = ({ setScreen, jobViewContext, recorded, setRecorded, classNam
           <img src={previewUrl || require("../../images/i6.png")} />
         )}
 
-        <div style={{ position: 'absolute', width: '100%', height: '100%' }} className={`${hoverShow ? `d-flex` : `d-${playing ? 'none' : 'flex'}`}`}>
+        <div style={{ position: 'absolute', width: '100%', height: '100%' }} className={`${hoverShow ? `d-flex` : `d-${playing ? 'none' : 'flex'}`} mobile-retry`} >
           <div className="d-flex justify-content-between skdjand-wkemd ksljfsa-asjd">
             <div className="circleButtons" onClick={() => {
               const _recorded = [...recorded];

@@ -4,7 +4,7 @@ import Icons from "../icons";
 import RecordForm from "./recordForm";
 import { useFullscreen } from "../../hooks/useFullscreen";
 
-const RecordFormParent = ({ setScreen, jobViewContext, recorded, setRecorded, className = '', fromShareScreen }: { setScreen: any, jobViewContext: any, recorded: any, setRecorded: any, className?: any, fromShareScreen: any }) => {
+const RecordFormParent = ({ setScreen, jobViewContext, screen, recorded, setRecorded, className = '', fromShareScreen }: { setScreen: any, jobViewContext: any, screen:number, recorded: any, setRecorded: any, className?: any, fromShareScreen: any }) => {
   const [shouldDisplay, setShouldDisplay] = useState(false);
   const { setFullscreen } = useFullscreen()
   useEffect(() => {
@@ -37,8 +37,9 @@ const RecordFormParent = ({ setScreen, jobViewContext, recorded, setRecorded, cl
   return (
     <div id="targetElement" className={`kjjfds-janwkea4 ${className}`}>
       <div
-        style={{ width: 320, height: 520 }}
+        style={{ width: 320 }}
         className="kjdflmas-sdmfe kamnask-asnw kljdnas-jdnwd"
+        id={`${screen===1?"kljdnas-jdnwd":""}`}
       >
         {shouldDisplay ? (
           <RecordForm fromParent={true} setScreen={setScreen} jobViewContext={jobViewContext} recorded={recorded} setRecorded={setRecorded} />

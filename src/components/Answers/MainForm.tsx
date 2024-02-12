@@ -2,12 +2,17 @@ import { Container, Row, Col } from "react-bootstrap";
 import Card from "./Card";
 import Icons from "../icons";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AnswerFilter } from "../../screens/answers";
+import PaymentForm from "../Modals/PaymentForm";
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import $ from 'jquery';
 import { useAuth } from "../../hooks/useAuth";
 import Notify from "../Notify";
 import Loading from "../Loading/Loading";
 import ShowLess from "../Loading/ShowLess";
+import { onGetInvoices, onGetSubscriptionDetails } from "../../utils/stripe";
 
 interface Interview {
   videoLink: string;
@@ -27,15 +32,28 @@ interface Interview {
   createdAt?: string;
 }
 
-const MainForm = ({ setMainScreen,setJobViewContext, showScreen, setshowScreen, selectedFilter, setSelectedInterview, allInterviews, setAllInterviews, jobViewContext, watchAns }: { setMainScreen: any, showScreen: number, setshowScreen: any, selectedFilter: AnswerFilter,setJobViewContext:any, setSelectedInterview: any, allInterviews: any, setAllInterviews: any, jobViewContext: any, watchAns: any }) => {
+
+const stripePromise: any = loadStripe(
+  'pk_test_51MgVdpIwSlV98qeBn0Y381DODqMPtMUpkj2sZw94M4bspKoZFZPDqv9SqHUNn4R5ikNLe5jrKeLAnk6o4yjnjFKM00NQikS8rT'
+);
+
+const MainForm = ({ setMainScreen,AnswerfilteredInterviews,AnswerSetfilteredInterviews,setJobViewContext, showScreen, setshowScreen, selectedFilter, setSelectedInterview, allInterviews, setAllInterviews, jobViewContext, watchAns }: { setMainScreen: any, showScreen: number, setshowScreen: any, selectedFilter: AnswerFilter,setJobViewContext:any, setSelectedInterview: any, allInterviews: any, setAllInterviews: any, jobViewContext: any, watchAns: any,AnswerfilteredInterviews:any,AnswerSetfilteredInterviews:any }) => {
   const [filteredInterviews, setFilteredInterviews] = useState<Array<Interview>>([])
   const [myAnswers, setMyAnswers] = useState<any>(false);
+  const [showPayment, setShowPayment] = useState(false);
   const [loading, setLoading] = useState(true)
   const [show, setShow] = useState(true)
-  const { user } = useAuth()
+  const { user, setUser } = useAuth()
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 15; // Number of jobs per page
   const [showMore, setShowMore] = useState(false);
+  const subscribed = localStorage.getItem("subscribed");
+  const role = user?.chat?.user?.users[user.id].role;
+  const [invoices, setInvoices] = useState<Record<string, any>[]>([]);
+  const [subscription, setSubscription] = useState<
+    Record<string, any>[] | null
+  >(null);
+
 
   const handleFilteration = (array: any) => {
     const questionsArray: Array<Interview> = array?.map((obj: any) => ({
@@ -153,12 +171,22 @@ useEffect(() => {
           filteredInterviews = [...allInterviews];
           break;
       }
-
+AnswerSetfilteredInterviews(filteredInterviews)
       setFilteredInterviews(filteredInterviews);
     }
     setShowMore(false)
     setCurrentPage(1)
   }, [selectedFilter, allInterviews]);
+
+  const handlePaymentClose = () =>{
+    setShowPayment(false);
+  }
+
+  const handleUserSubscription = () => {
+    if(subscribed==="false" && role==="user"){
+      setShowPayment(true);
+    }
+  }
 
 
  const handleShowMore = () => {
@@ -171,6 +199,28 @@ useEffect(() => {
   setShowMore(false);
  }
 
+ const getStripeInfo = useCallback(async (sId?: string, cId?: string) => {
+  (cId || user?.customerId) &&
+    setInvoices(await onGetInvoices(cId ?? user?.customerId!));
+  (sId || user?.subId) &&
+    setSubscription(await onGetSubscriptionDetails(sId ?? user?.subId!));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const updateUser = (customerId: string, subId: string) => {
+    axios
+      .patch(`${process.env.REACT_APP_BACKEND_URL}/users/${user?.id}`, {
+        customerId,
+        subId
+      })
+      .then(res => {
+        user && setUser({ ...user, customerId, subId });
+      });
+  };
+
+  useEffect(() => {
+    getStripeInfo();
+  }, [getStripeInfo]);
 
   
   const startIndex = 0; // Always start from the first item
@@ -194,7 +244,18 @@ useEffect(() => {
           </button>
         </div>
       </div>
-
+      {/* pay-wall */}
+      <Elements stripe={stripePromise}>
+      {showPayment && (
+        <PaymentForm
+          handleClose={handlePaymentClose}
+          successHandle={(sId, cId) => {
+            updateUser(cId ?? '', sId);
+            getStripeInfo(sId, cId);
+          }}
+        />
+      )}
+    </Elements>
       <div className="kdhfkjjdsfo">
         <Icons iconNumber={32} />
         <h5 className="mksaldkamaw-jdwa">{user?.location.toUpperCase()}</h5>
@@ -211,8 +272,8 @@ useEffect(() => {
                 <Row className="row-cols-3 row-cols-sm-4 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 justify-content-start mxrow-answers" style={{ gap: 10, padding: '4px 14px' }} >
                   {
                     currentJobs.map((interview, index) => (
-                      <Col className="p-0 mb-0 d-inline-flex justify-content-center align-items-center" style={{ cursor: 'pointer', width:'100%', maxWidth: '120px', maxHeight: '226px' }} key={index}>
-                        <Card setMainScreen={setMainScreen} showScreen={showScreen} setshowScreen={setshowScreen} interview={interview} handleFilteration={handleFilteration} setSelectedInterview={setSelectedInterview} />
+                      <Col className="p-0 mb-0 d-inline-flex justify-content-center align-items-center" style={{ cursor: 'pointer', width:'100%', maxWidth: '120px', maxHeight: '226px' }} key={index} onClick={() => index > 2 ? handleUserSubscription() : null}>
+                        <Card VideoIndex={index} setMainScreen={setMainScreen} showScreen={showScreen} setshowScreen={setshowScreen} interview={interview} handleFilteration={handleFilteration} setSelectedInterview={setSelectedInterview} />
                       </Col>
                     ))
                   }

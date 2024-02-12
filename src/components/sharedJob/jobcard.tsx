@@ -5,13 +5,13 @@ import Icons from "../icons"
 
 
 
-const JobCard = ({ setShareScreen, setMainScreen, setFromShareScreen, sharedJobData }: { setShareScreen: any, setMainScreen: any, setFromShareScreen: any, sharedJobData: any }) => {
+const JobCard = ({ setShareScreen, setMainScreen, setFromShareScreen, sharedJobData,className = '' }: { setShareScreen: any, setMainScreen: any, setFromShareScreen: any, sharedJobData: any,className?:string }) => {
 
     // const { sharedJobData }: { sharedJobData: any } = useShared()
     const { isLoggedIn } = useAuth()
 
     return (
-        <div className={`kjjfds-janwkea1 kjjfds-janwkea2 white-form height-none`} style={{ marginTop: "100px", marginBottom: "140px" }}>
+        <div className={`kjjfds-janwkea1 kjjfds-janwkea2 white-form height-none ${className}`} style={{ marginTop: "90px", marginBottom: "140px", marginLeft:0 }}>
             <div className='wave-box'>
                 <div className='wave'></div>
             </div>
@@ -36,7 +36,7 @@ const JobCard = ({ setShareScreen, setMainScreen, setFromShareScreen, sharedJobD
                     ))}
                 </div>
                 <div className="kdjsa-ajwnkelds afkfjnkas-edsm">
-                    <div className="continueBtnDiv snasdj-sawdne">
+                    <div className="continueBtnDiv snasdj-sawdne startInterviewBtn">
                         <button className="btn" onClick={() => {
                             if (isLoggedIn()) {
                                 setMainScreen(3)
@@ -46,7 +46,7 @@ const JobCard = ({ setShareScreen, setMainScreen, setFromShareScreen, sharedJobD
                                 setShareScreen(2)
                             }
                         }}>
-                            Begin
+                            Start Interview
                             <div className="kdksa-ajwmd ">
                                 <Icons iconNumber={7} />
                             </div>

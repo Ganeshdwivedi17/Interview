@@ -14,6 +14,8 @@ const RightButtons = ({ hideMenu, setChatUser, selectedInterview, setAllIntervie
   const [showDelInterview, setShowDelInterview] = useState(false);
   const { setJobViewContext, user } = useAuth();
 
+
+
   const role = user?.chat?.user?.users[user.id].role;
 
 
@@ -67,7 +69,7 @@ const RightButtons = ({ hideMenu, setChatUser, selectedInterview, setAllIntervie
   </div>
 }
  
-const TestiMonials = ({ setChatUser, selectedInterview, setAllInterviews, setMainScreen, setshowScreen }: { selectedInterview?: any, setAllInterviews?: any, setMainScreen?: any, setshowScreen?: any, setChatUser?: any }) => {
+const TestiMonials = ({ AnswerfilteredInterviews,setChatUser, selectedInterview, setAllInterviews, setMainScreen, setshowScreen }: { selectedInterview?: any, setAllInterviews?: any, setMainScreen?: any, setshowScreen?: any, setChatUser?: any,AnswerfilteredInterviews?:any }) => {
   const [favourite, setFavourite] = useState(selectedInterview?.favourite || false);
   const [paginate, setPaginate] = useState<any>(1)
 
@@ -82,7 +84,7 @@ const TestiMonials = ({ setChatUser, selectedInterview, setAllInterviews, setMai
 
   return (
     <div className='wh-100 kjsdfl-asjdm'>
-      <VideoForm selectedInterview={selectedInterview} favourite={favourite} />
+      <VideoForm AnswerfilteredInterviews={AnswerfilteredInterviews} selectedInterview={selectedInterview} favourite={favourite} />
       <RightButtons setChatUser={setChatUser} hideMenu={false} selectedInterview={selectedInterview} setshowScreen={setshowScreen} setMainScreen={setMainScreen} setAllInterviews={setAllInterviews} favourite={favourite} setFavourite={setFavourite} />
     </div>
   )
